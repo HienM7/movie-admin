@@ -80,7 +80,7 @@ const rows = [
 const roles = [
   {id: 1, name: 'ADMIN'},
   {id: 2, name: 'EMPLOYEE'},
-  {id: 3, name: 'GUEST'},
+  // {id: 3, name: 'GUEST'},
 ];
 
 const actions = [
@@ -110,12 +110,15 @@ export default function UserManagement() {
   const [actionIds, setActionIds] = React.useState([]);
   const [userId, setUserId] = React.useState();
   const [openDel, setOpenDel] = React.useState(false);
+  const [filterRole, setFilterRole] = React.useState('ALL');
 
   React.useEffect(()=>{
     let mounted=true;
     axios.get("https://myplsapp.herokuapp.com/rest-account/accounts") 
     .then(response => {
         if (mounted) setAllUser(response.data.data);
+        // .filter(user => user.roles[0].rolename !== 'ROLE_GUEST')
+        console.log(response.data.data)
       })
       .catch(err => console.log(err));
 
@@ -211,10 +214,29 @@ export default function UserManagement() {
         </Typography>
       </div>
       <Link to={`/users/create`} className={classes.link}>
-            <Button variant="contained" className={classes.buttonCreate} color="primary">
-              Create new user
-            </Button>
-          </Link>
+        <Button variant="contained" className={classes.buttonCreate} color="primary">
+          Create new user
+        </Button>
+      </Link>
+        <div  style={{width: 200, marginTop: 20, marginBottom: 20}}>
+        <FormControl variant="outlined" className={classes.formControl}>
+        <InputLabel id="demo-simple-select-outlined-label">Filter</InputLabel>
+        <Select
+          labelId="demo-simple-select-outlined-label"
+          id="demo-simple-select-outlined"
+          value={filterRole}
+          onChange={(e) => setFilterRole(e.target.value)}
+          label="Filter"
+        >
+          <MenuItem value='ALL'>
+            <em>ALL</em>
+          </MenuItem>
+          <MenuItem value='GUEST'>GUEST</MenuItem>
+          <MenuItem value='EMPLOYEE'>EMPLOYEE</MenuItem>
+          <MenuItem value='ADMIN'>ADMIN</MenuItem>
+        </Select>
+      </FormControl>
+      </div>
     <TableContainer component={Paper}>
       <Table className={classes.table} aria-label="simple table">
         <TableHead>
@@ -232,7 +254,7 @@ export default function UserManagement() {
           </TableRow>
         </TableHead>
         <TableBody>
-          {allUser.map((user) => (
+          {allUser.filter(user => filterRole === 'ALL' ? true : user.roles.map(role => role.rolename).indexOf(`ROLE_${filterRole}`) !== -1).map((user) => (
             <TableRow key={user.username}>
               <TableCell component="th" scope="row">
                 {user.username}
@@ -243,15 +265,17 @@ export default function UserManagement() {
               <TableCell align="right">{user.userDto.age}</TableCell>
               <TableCell align="right">{(""+user.roles.map(role => role.rolename)).split(',').join(' ')}</TableCell>
               <TableCell align="right">
+              {user.roles[0].rolename !== 'ROLE_GUEST' &&
                 <Button variant="contained" className={classes.buttonCreate} color="primary" onClick={() => handleRolesOpen(user)}>
                   Edit
-                </Button>
+                </Button>}
               </TableCell>
               <TableCell align="right">{(""+user.actions.map(action => action.actname)).split(',').join(' ')}</TableCell>
               <TableCell align="right">
+                {user.roles[0].rolename !== 'ROLE_GUEST' &&
                 <Button variant="contained" className={classes.buttonCreate} color="primary"onClick={() => handleActionsOpen(user)} >
                   Edit
-                </Button>
+                </Button>}
               </TableCell>
               <TableCell align="right">
                 <Button variant="contained" className={classes.buttonCreate} color="primary"onClick={() => handleDelOpen(user)} >

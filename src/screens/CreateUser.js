@@ -77,7 +77,7 @@ const MenuProps = {
 const roles = [
   {id: 1, name: 'ADMIN'},
   {id: 2, name: 'EMPLOYEE'},
-  {id: 3, name: 'GUEST'},
+  // {id: 3, name: 'GUEST'},
 ];
 
 const actions = [
