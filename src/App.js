@@ -3,7 +3,8 @@ import SignIn from './screens/SignIn';
 import { useContext} from 'react';
 import { AuthContext } from './contexts/AuthContext';
 import UserManagement from './screens/UserManagement'
-import CreateUser from './screens/CreateUser'
+import CreateUser from './screens/CreateUser';
+import Statistical from './screens/Statistical';
 
 import {
   BrowserRouter as Router,
@@ -43,6 +44,9 @@ function App() {
             { !authInfo.isLogin ? <Redirect to='/login'/> :  <CreateUser />}
           </Route>
 
+          <Route exact path="/statistical">
+            { !authInfo.isLogin ? <Redirect to='/login'/> :  <Statistical />}
+          </Route>
           {/* <Route exact path="/movie/edit">
             { !authInfo.isLogin ? <Redirect to='/login'/> :  <UpdateMovie />}
           </Route>
