@@ -81,10 +81,24 @@ const roles = [
 ];
 
 const actions = [
-  {id: 1, name: 'CREATE'},
-  {id: 2, name: 'READ'},
-  {id: 3, name: 'UPDATE'},
-  {id: 4, name: 'DELETE'},
+  {id: 1, name: 'ACCOUNT.CREATE'},
+  {id: 2, name: 'ACCOUNT.READ'},
+  {id: 3, name: 'ACCOUNT.UPDATE'},
+  {id: 4, name: 'ACCOUNT.DELETE'},
+  {id: 5, name: 'MOVIE.CREATE'},
+  {id: 6, name: 'MOVIE.READ'},
+  {id: 7, name: 'MOVIE.UPDATE'},
+  {id: 8, name: 'GENRE.CREATE'},
+  {id: 9, name: 'GENRE.READ'},
+  {id: 10, name: 'GENRE.UPDATE'},
+  {id: 11, name: 'SCREENING.CREATE'},
+  {id: 12, name: 'SCREENING.READ'},
+  {id: 13, name: 'SCREENING.UPDATE'},
+  {id: 14, name: 'SCREENING.DELETE'},
+  {id: 15, name: 'BOOKING.CREATE'},
+  {id: 16, name: 'BOOKING.READ'},
+  {id: 17, name: 'TICKET.READ'},
+  {id: 18, name: 'REVENUE.READ'},
 ]
 
 export default function CreateUser() {
