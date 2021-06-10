@@ -218,7 +218,7 @@ export default function UserManagement() {
   }
 
   return (
-    <Container  container className={classes.root}>
+    <Container container className={classes.root} style={{maxWidth: 1440}}>
       <div >
       <Avatar className={classes.avatar} style={{margin: '0 auto'}}>
           <AssignmentIndIcon />
