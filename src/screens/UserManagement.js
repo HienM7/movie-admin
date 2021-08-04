@@ -286,10 +286,9 @@ export default function UserManagement() {
               </TableCell>
               <TableCell align="right">{(""+user.actions.map(action => action.actname)).split(',').join(' ')}</TableCell>
               <TableCell align="right">
-                {user.roles[0].rolename !== 'ROLE_GUEST' &&
                 <Button variant="contained" className={classes.buttonCreate} color="primary"onClick={() => handleActionsOpen(user)} >
                   Edit
-                </Button>}
+                </Button>
               </TableCell>
               <TableCell align="right">
                 <Button variant="contained" className={classes.buttonCreate} color="primary"onClick={() => handleDelOpen(user)} >
