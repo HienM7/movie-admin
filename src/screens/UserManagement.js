@@ -26,6 +26,8 @@ import DialogActions from '@material-ui/core/DialogActions';
 import DialogContent from '@material-ui/core/DialogContent';
 import DialogContentText from '@material-ui/core/DialogContentText';
 import DialogTitle from '@material-ui/core/DialogTitle';
+import Pagination from '@material-ui/lab/Pagination';
+
 
 const useStyles = makeStyles((theme) => ({
   table: {
@@ -53,6 +55,11 @@ const useStyles = makeStyles((theme) => ({
   chip: {
     margin: 2,
   },
+  pagination: {
+    display: 'flex',
+    justifyContent: 'center',
+    margin: '50px auto'
+  }
 }));
 const ITEM_HEIGHT = 48;
 const ITEM_PADDING_TOP = 8;
@@ -300,6 +307,9 @@ export default function UserManagement() {
         </TableBody>
       </Table>
     </TableContainer>
+    <div className={classes.pagination}>
+      <Pagination count={1} variant="outlined" color="primary" showFirstButton showLastButton />
+    </div>
 
     <div>
         <Dialog open={open} onClose={handleRolesClose} aria-labelledby="form-dialog-title">
