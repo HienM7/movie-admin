@@ -19,7 +19,7 @@ export const AuthProvider = (props) => {
         try {
           payload = jwt_decode(localStorage.getItem("token"));
         } catch (e) {
-          localStorage.removeItem("token");
+          // localStorage.removeItem("token");
           setAuthInfo({
             isLoading: false,
           });

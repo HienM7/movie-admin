@@ -118,6 +118,21 @@ export default function CreateUser() {
   const doCreateUser = async (event) => {
     event.preventDefault();
     try {
+      const check =
+        roleIds.length === 0 ||
+        actionIds.length === 0 ||
+        !username ||
+        !fullName ||
+        !email ||
+        !password ||
+        !age ||
+        !address;
+
+      if (check) {
+        setError("Cant create user, please fill all field");
+        return;
+      }
+
       const newUser = await axios.post(
         "https://myplsapp.herokuapp.com/rest-account/accounts",
         {
