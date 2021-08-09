@@ -19,6 +19,7 @@ export const AuthProvider = (props) => {
         try {
           payload = jwt_decode(localStorage.getItem("token"));
         } catch (e) {
+          localStorage.removeItem("token");
           setAuthInfo({
             isLoading: false,
           });
@@ -36,6 +37,7 @@ export const AuthProvider = (props) => {
           });
           return;
         }
+
         if (payload.roles.indexOf("ROLE_ADMIN") !== -1) {
           setAuthInfo({
             ...authInfo,

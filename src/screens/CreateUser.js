@@ -1,42 +1,41 @@
-import React, { useState } from 'react';
-import Avatar from '@material-ui/core/Avatar';
-import Button from '@material-ui/core/Button';
-import CssBaseline from '@material-ui/core/CssBaseline';
-import TextField from '@material-ui/core/TextField';
-import FormControlLabel from '@material-ui/core/FormControlLabel';
-import Checkbox from '@material-ui/core/Checkbox';
-import Link from '@material-ui/core/Link';
-import Grid from '@material-ui/core/Grid';
-import Box from '@material-ui/core/Box';
-import LockOutlinedIcon from '@material-ui/icons/LockOutlined';
-import AssignmentIndIcon from '@material-ui/icons/AssignmentInd';
-import Typography from '@material-ui/core/Typography';
-import { makeStyles, useTheme } from '@material-ui/core/styles';
-import Container from '@material-ui/core/Container';
-import InputLabel from '@material-ui/core/InputLabel';
-import MenuItem from '@material-ui/core/MenuItem';
-import FormControl from '@material-ui/core/FormControl';
-import Select from '@material-ui/core/Select';
-import Chip from '@material-ui/core/Chip';
-import Input from '@material-ui/core/Input';
-import axios from 'axios';
-import  { Redirect } from 'react-router-dom';
-
-
+import React, { useState } from "react";
+import Avatar from "@material-ui/core/Avatar";
+import Button from "@material-ui/core/Button";
+import CssBaseline from "@material-ui/core/CssBaseline";
+import TextField from "@material-ui/core/TextField";
+import FormControlLabel from "@material-ui/core/FormControlLabel";
+import Checkbox from "@material-ui/core/Checkbox";
+import Link from "@material-ui/core/Link";
+import Grid from "@material-ui/core/Grid";
+import Box from "@material-ui/core/Box";
+import LockOutlinedIcon from "@material-ui/icons/LockOutlined";
+import AssignmentIndIcon from "@material-ui/icons/AssignmentInd";
+import Typography from "@material-ui/core/Typography";
+import { makeStyles, useTheme } from "@material-ui/core/styles";
+import Container from "@material-ui/core/Container";
+import InputLabel from "@material-ui/core/InputLabel";
+import MenuItem from "@material-ui/core/MenuItem";
+import FormControl from "@material-ui/core/FormControl";
+import Select from "@material-ui/core/Select";
+import Chip from "@material-ui/core/Chip";
+import Input from "@material-ui/core/Input";
+import axios from "axios";
+import { Redirect } from "react-router-dom";
+import Alert from "@material-ui/lab/Alert";
 
 const useStyles = makeStyles((theme) => ({
   paper: {
     marginTop: theme.spacing(8),
-    display: 'flex',
-    flexDirection: 'column',
-    alignItems: 'center',
+    display: "flex",
+    flexDirection: "column",
+    alignItems: "center",
   },
   avatar: {
     margin: theme.spacing(1),
     backgroundColor: theme.palette.secondary.main,
   },
   form: {
-    width: '100%', // Fix IE 11 issue.
+    width: "100%", // Fix IE 11 issue.
     marginTop: theme.spacing(3),
   },
   submit: {
@@ -44,7 +43,7 @@ const useStyles = makeStyles((theme) => ({
   },
   formControl: {
     // margin: theme.spacing(1),
-    width: '100%',
+    width: "100%",
     height: 50,
     paddingBottom: 20,
   },
@@ -62,7 +61,6 @@ function getStyles(name, personName, theme) {
   };
 }
 
-
 const ITEM_HEIGHT = 48;
 const ITEM_PADDING_TOP = 8;
 const MenuProps = {
@@ -75,75 +73,77 @@ const MenuProps = {
 };
 
 const roles = [
-  {id: 1, name: 'ADMIN'},
-  {id: 2, name: 'EMPLOYEE'},
+  { id: 1, name: "ADMIN" },
+  { id: 2, name: "EMPLOYEE" },
   // {id: 3, name: 'GUEST'},
 ];
 
 const actions = [
-  {id: 1, name: 'ACCOUNT.CREATE'},
-  {id: 2, name: 'ACCOUNT.READ'},
-  {id: 3, name: 'ACCOUNT.UPDATE'},
-  {id: 4, name: 'ACCOUNT.DELETE'},
-  {id: 5, name: 'MOVIE.CREATE'},
-  {id: 6, name: 'MOVIE.READ'},
-  {id: 7, name: 'MOVIE.UPDATE'},
-  {id: 8, name: 'GENRE.CREATE'},
-  {id: 9, name: 'GENRE.READ'},
-  {id: 10, name: 'GENRE.UPDATE'},
-  {id: 11, name: 'SCREENING.CREATE'},
-  {id: 12, name: 'SCREENING.READ'},
-  {id: 13, name: 'SCREENING.UPDATE'},
-  {id: 14, name: 'SCREENING.DELETE'},
-  {id: 15, name: 'BOOKING.CREATE'},
-  {id: 16, name: 'BOOKING.READ'},
-  {id: 17, name: 'TICKET.READ'},
-  {id: 18, name: 'REVENUE.READ'},
-]
+  { id: 1, name: "ACCOUNT.CREATE" },
+  { id: 2, name: "ACCOUNT.READ" },
+  { id: 3, name: "ACCOUNT.UPDATE" },
+  { id: 4, name: "ACCOUNT.DELETE" },
+  { id: 5, name: "MOVIE.CREATE" },
+  { id: 6, name: "MOVIE.READ" },
+  { id: 7, name: "MOVIE.UPDATE" },
+  { id: 8, name: "GENRE.CREATE" },
+  { id: 9, name: "GENRE.READ" },
+  { id: 10, name: "GENRE.UPDATE" },
+  { id: 11, name: "SCREENING.CREATE" },
+  { id: 12, name: "SCREENING.READ" },
+  { id: 13, name: "SCREENING.UPDATE" },
+  { id: 14, name: "SCREENING.DELETE" },
+  { id: 15, name: "BOOKING.CREATE" },
+  { id: 16, name: "BOOKING.READ" },
+  { id: 17, name: "TICKET.READ" },
+  { id: 18, name: "REVENUE.READ" },
+];
 
 export default function CreateUser() {
   const classes = useStyles();
   const theme = useTheme();
-  
+
   const [roleIds, setRoleIds] = useState([]);
   const [actionIds, setActionsIds] = useState([]);
-  const [username, setUsername] = useState('');
-  const [fullName, setFullName] = useState('');
-  const [email, setEmail] = useState('');
-  const [password, setPassword] = useState('');
-  const [age, setAge] = useState('');
-  const [address, setAddress] = useState('');
+  const [username, setUsername] = useState("");
+  const [fullName, setFullName] = useState("");
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+  const [age, setAge] = useState("");
+  const [address, setAddress] = useState("");
+  const [error, setError] = useState("");
 
   const [created, setCreate] = useState(false);
 
   const doCreateUser = async (event) => {
     event.preventDefault();
     try {
-      const newUser = await axios.post('https://myplsapp.herokuapp.com/rest-account/accounts', {
-        username: username,
-        password: password,
-        userDto: {
-          name: fullName,
-          email: email,
-          age: age,
-          address: address
-        },
-        roles: roleIds.map(id => ({id})),
-        actions: actionIds.map(id => ({id}))
-      });
+      const newUser = await axios.post(
+        "https://myplsapp.herokuapp.com/rest-account/accounts",
+        {
+          username: username,
+          password: password,
+          userDto: {
+            name: fullName,
+            email: email,
+            age: age,
+            address: address,
+          },
+          roles: roleIds.map((id) => ({ id })),
+          actions: actionIds.map((id) => ({ id })),
+        }
+      );
       if (newUser.status === 200 || newUser.status === 201) {
         setCreate(true);
-      }      
+      }
     } catch (error) {
+      setError("Cant create user");
       console.log(error);
     }
-  }
-
-  
- 
+  };
 
   if (created === true) {
-      return <Redirect to="/users"/>
+    return <Redirect to="/users" />;
   }
 
   return (
@@ -157,6 +157,7 @@ export default function CreateUser() {
           Create User
         </Typography>
         <form className={classes.form} noValidate onSubmit={doCreateUser}>
+          {error && <Alert severity="error">{error}</Alert>}
           <Grid container spacing={2}>
             <Grid item xs={12} sm={6}>
               <TextField
@@ -169,7 +170,7 @@ export default function CreateUser() {
                 label="Username"
                 autoFocus
                 value={username}
-                onChange={e => setUsername(e.target.value)}
+                onChange={(e) => setUsername(e.target.value)}
                 required
               />
             </Grid>
@@ -183,7 +184,7 @@ export default function CreateUser() {
                 name="lastName"
                 autoComplete="lname"
                 value={fullName}
-                onChange={e => setFullName(e.target.value)}
+                onChange={(e) => setFullName(e.target.value)}
                 required
               />
             </Grid>
@@ -195,9 +196,9 @@ export default function CreateUser() {
                 id="email"
                 label="Email Address"
                 name="email"
-                type='email'
+                type="email"
                 value={email}
-                onChange={e => setEmail(e.target.value)}
+                onChange={(e) => setEmail(e.target.value)}
                 required
               />
             </Grid>
@@ -211,11 +212,11 @@ export default function CreateUser() {
                 type="password"
                 id="password"
                 value={password}
-                onChange={e => setPassword(e.target.value)}
+                onChange={(e) => setPassword(e.target.value)}
                 required
               />
             </Grid>
-            <Grid item xs={12} sm={6} style={{marginBottom: 15}}>
+            <Grid item xs={12} sm={6} style={{ marginBottom: 15 }}>
               <TextField
                 variant="outlined"
                 required
@@ -223,7 +224,7 @@ export default function CreateUser() {
                 id="firstName"
                 label="Age"
                 value={age}
-                onChange={e => setAge(e.target.value)}
+                onChange={(e) => setAge(e.target.value)}
                 required
               />
             </Grid>
@@ -237,82 +238,91 @@ export default function CreateUser() {
                 name="Address"
                 autoComplete="lname"
                 value={address}
-                onChange={e => setAddress(e.target.value)}
+                onChange={(e) => setAddress(e.target.value)}
                 required
               />
             </Grid>
           </Grid>
 
-          <FormControl variant="outlined" className={classes.formControl} style ={{marginBottom: 30}}>
+          <FormControl
+            variant="outlined"
+            className={classes.formControl}
+            style={{ marginBottom: 30 }}
+          >
             <InputLabel id="demo-simple-select-outlined">Roles</InputLabel>
             <Select
               labelId="demo-simple-select-outlined"
               id="demo-simple-select-outlined"
               multiple
               required
-              
               // ref={selectRef}
               value={roleIds}
-              onChange={(e) => { 
+              onChange={(e) => {
                 setRoleIds(e.target.value);
               }}
               input={<Input id="select-multiple-chip" />}
               renderValue={(selected) => (
                 <div className={classes.chips}>
                   {selected.map((value) => (
-                    <Chip key={value} label={roles.find(role => role.id === value).name} className={classes.chip} />
+                    <Chip
+                      key={value}
+                      label={roles.find((role) => role.id === value).name}
+                      className={classes.chip}
+                    />
                   ))}
                 </div>
               )}
               MenuProps={MenuProps}
             >
               {roles.map((item) => (
-                <MenuItem key={item.id} value={item.id} style={getStyles(item.id, roleIds, theme)}>
+                <MenuItem
+                  key={item.id}
+                  value={item.id}
+                  style={getStyles(item.id, roleIds, theme)}
+                >
                   {item.name}
                 </MenuItem>
               ))}
             </Select>
           </FormControl>
 
-          <FormControl variant="outlined" className={classes.formControl} >
+          <FormControl variant="outlined" className={classes.formControl}>
             <InputLabel id="demo-simple-select-outlined">Actions</InputLabel>
             <Select
               labelId="demo-simple-select-outlined"
               id="demo-simple-select-outlined"
               multiple
               required
-              
               // ref={selectRef}
               value={actionIds}
-              onChange={(e) => { 
+              onChange={(e) => {
                 setActionsIds(e.target.value);
               }}
               input={<Input id="select-multiple-chip" />}
               renderValue={(selected) => (
                 <div className={classes.chips}>
                   {selected.map((value) => (
-                    <Chip key={value} label={actions.find(action => action.id === value).name} className={classes.chip} />
+                    <Chip
+                      key={value}
+                      label={actions.find((action) => action.id === value).name}
+                      className={classes.chip}
+                    />
                   ))}
                 </div>
               )}
               MenuProps={MenuProps}
             >
               {actions.map((item) => (
-                <MenuItem key={item.id} value={item.id} style={getStyles(item.id, actionIds, theme)}>
+                <MenuItem
+                  key={item.id}
+                  value={item.id}
+                  style={getStyles(item.id, actionIds, theme)}
+                >
                   {item.name}
                 </MenuItem>
               ))}
             </Select>
           </FormControl>
-
-
-
-
-
-
-
-
-
 
           <Button
             type="submit"

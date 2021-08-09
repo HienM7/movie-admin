@@ -1,40 +1,40 @@
-import React from 'react';
-import Table from '@material-ui/core/Table';
-import TableBody from '@material-ui/core/TableBody';
-import TableCell from '@material-ui/core/TableCell';
-import TableContainer from '@material-ui/core/TableContainer';
-import TableHead from '@material-ui/core/TableHead';
-import TableRow from '@material-ui/core/TableRow';
-import Paper from '@material-ui/core/Paper';
-import axios from 'axios';
-import { Container } from '@material-ui/core';
-import Typography from '@material-ui/core/Typography';
-import Button from '@material-ui/core/Button';
-import AssignmentIndIcon from '@material-ui/icons/AssignmentInd';
-import Avatar from '@material-ui/core/Avatar';
-import { Link } from 'react-router-dom';
-import { makeStyles, useTheme } from '@material-ui/core/styles';
-import InputLabel from '@material-ui/core/InputLabel';
-import MenuItem from '@material-ui/core/MenuItem';
-import FormControl from '@material-ui/core/FormControl';
-import Select from '@material-ui/core/Select';
-import Chip from '@material-ui/core/Chip';
-import Input from '@material-ui/core/Input';
-import TextField from '@material-ui/core/TextField';
-import Dialog from '@material-ui/core/Dialog';
-import DialogActions from '@material-ui/core/DialogActions';
-import DialogContent from '@material-ui/core/DialogContent';
-import DialogContentText from '@material-ui/core/DialogContentText';
-import DialogTitle from '@material-ui/core/DialogTitle';
-import Pagination from '@material-ui/lab/Pagination';
-
+import React from "react";
+import Table from "@material-ui/core/Table";
+import TableBody from "@material-ui/core/TableBody";
+import TableCell from "@material-ui/core/TableCell";
+import TableContainer from "@material-ui/core/TableContainer";
+import TableHead from "@material-ui/core/TableHead";
+import TableRow from "@material-ui/core/TableRow";
+import Paper from "@material-ui/core/Paper";
+import axios from "axios";
+import { Container } from "@material-ui/core";
+import Typography from "@material-ui/core/Typography";
+import Button from "@material-ui/core/Button";
+import AssignmentIndIcon from "@material-ui/icons/AssignmentInd";
+import Avatar from "@material-ui/core/Avatar";
+import { Link } from "react-router-dom";
+import { makeStyles, useTheme } from "@material-ui/core/styles";
+import InputLabel from "@material-ui/core/InputLabel";
+import MenuItem from "@material-ui/core/MenuItem";
+import FormControl from "@material-ui/core/FormControl";
+import Select from "@material-ui/core/Select";
+import Chip from "@material-ui/core/Chip";
+import Input from "@material-ui/core/Input";
+import TextField from "@material-ui/core/TextField";
+import Dialog from "@material-ui/core/Dialog";
+import DialogActions from "@material-ui/core/DialogActions";
+import DialogContent from "@material-ui/core/DialogContent";
+import DialogContentText from "@material-ui/core/DialogContentText";
+import DialogTitle from "@material-ui/core/DialogTitle";
+import Pagination from "@material-ui/lab/Pagination";
+import Alert from "@material-ui/lab/Alert";
 
 const useStyles = makeStyles((theme) => ({
   table: {
     minWidth: 650,
   },
   root: {
-    marginTop: 120
+    marginTop: 120,
   },
   avatar: {
     margin: theme.spacing(1),
@@ -42,13 +42,13 @@ const useStyles = makeStyles((theme) => ({
   },
   paper: {
     marginTop: theme.spacing(8),
-    display: 'flex',
-    flexDirection: 'column',
-    alignItems: 'center',
+    display: "flex",
+    flexDirection: "column",
+    alignItems: "center",
   },
   formControl: {
     // margin: theme.spacing(1),
-    width: '100%',
+    width: "100%",
     height: 50,
     paddingBottom: 20,
   },
@@ -56,10 +56,10 @@ const useStyles = makeStyles((theme) => ({
     margin: 2,
   },
   pagination: {
-    display: 'flex',
-    justifyContent: 'center',
-    margin: '50px auto'
-  }
+    display: "flex",
+    justifyContent: "center",
+    margin: "50px auto",
+  },
 }));
 const ITEM_HEIGHT = 48;
 const ITEM_PADDING_TOP = 8;
@@ -77,39 +77,39 @@ function createData(name, calories, fat, carbs, protein) {
 }
 
 const rows = [
-  createData('Frozen yoghurt', 159, 6.0, 24, 4.0),
-  createData('Ice cream sandwich', 237, 9.0, 37, 4.3),
-  createData('Eclair', 262, 16.0, 24, 6.0),
-  createData('Cupcake', 305, 3.7, 67, 4.3),
-  createData('Gingerbread', 356, 16.0, 49, 3.9),
+  createData("Frozen yoghurt", 159, 6.0, 24, 4.0),
+  createData("Ice cream sandwich", 237, 9.0, 37, 4.3),
+  createData("Eclair", 262, 16.0, 24, 6.0),
+  createData("Cupcake", 305, 3.7, 67, 4.3),
+  createData("Gingerbread", 356, 16.0, 49, 3.9),
 ];
 
 const roles = [
-  {id: 1, name: 'ADMIN'},
-  {id: 2, name: 'EMPLOYEE'},
+  { id: 1, name: "ADMIN" },
+  { id: 2, name: "EMPLOYEE" },
   // {id: 3, name: 'GUEST'},
 ];
 
 const actions = [
-  {id: 1, name: 'ACCOUNT.CREATE'},
-  {id: 2, name: 'ACCOUNT.READ'},
-  {id: 3, name: 'ACCOUNT.UPDATE'},
-  {id: 4, name: 'ACCOUNT.DELETE'},
-  {id: 5, name: 'MOVIE.CREATE'},
-  {id: 6, name: 'MOVIE.READ'},
-  {id: 7, name: 'MOVIE.UPDATE'},
-  {id: 8, name: 'GENRE.CREATE'},
-  {id: 9, name: 'GENRE.READ'},
-  {id: 10, name: 'GENRE.UPDATE'},
-  {id: 11, name: 'SCREENING.CREATE'},
-  {id: 12, name: 'SCREENING.READ'},
-  {id: 13, name: 'SCREENING.UPDATE'},
-  {id: 14, name: 'SCREENING.DELETE'},
-  {id: 15, name: 'BOOKING.CREATE'},
-  {id: 16, name: 'BOOKING.READ'},
-  {id: 17, name: 'TICKET.READ'},
-  {id: 18, name: 'REVENUE.READ'},
-]
+  { id: 1, name: "ACCOUNT.CREATE" },
+  { id: 2, name: "ACCOUNT.READ" },
+  { id: 3, name: "ACCOUNT.UPDATE" },
+  { id: 4, name: "ACCOUNT.DELETE" },
+  { id: 5, name: "MOVIE.CREATE" },
+  { id: 6, name: "MOVIE.READ" },
+  { id: 7, name: "MOVIE.UPDATE" },
+  { id: 8, name: "GENRE.CREATE" },
+  { id: 9, name: "GENRE.READ" },
+  { id: 10, name: "GENRE.UPDATE" },
+  { id: 11, name: "SCREENING.CREATE" },
+  { id: 12, name: "SCREENING.READ" },
+  { id: 13, name: "SCREENING.UPDATE" },
+  { id: 14, name: "SCREENING.DELETE" },
+  { id: 15, name: "BOOKING.CREATE" },
+  { id: 16, name: "BOOKING.READ" },
+  { id: 17, name: "TICKET.READ" },
+  { id: 18, name: "REVENUE.READ" },
+];
 
 function getStyles(name, personName, theme) {
   return {
@@ -119,7 +119,6 @@ function getStyles(name, personName, theme) {
         : theme.typography.fontWeightMedium,
   };
 }
-
 
 export default function UserManagement() {
   const classes = useStyles();
@@ -131,21 +130,21 @@ export default function UserManagement() {
   const [actionIds, setActionIds] = React.useState([]);
   const [userId, setUserId] = React.useState();
   const [openDel, setOpenDel] = React.useState(false);
-  const [filterRole, setFilterRole] = React.useState('ALL');
+  const [filterRole, setFilterRole] = React.useState("ALL");
+  const [error, setError] = React.useState("");
+  const [loading, setLoading] = React.useState(true);
 
-  React.useEffect(()=>{
-    let mounted=true;
-    axios.get("https://myplsapp.herokuapp.com/rest-account/accounts") 
-    .then(response => {
-        if (mounted) setAllUser(response.data.data);
+  React.useEffect(() => {
+    axios
+      .get("https://myplsapp.herokuapp.com/rest-account/accounts")
+      .then((response) => {
+        setAllUser(response.data.data);
+        setLoading(false);
         // .filter(user => user.roles[0].rolename !== 'ROLE_GUEST')
-        console.log(response.data.data)
+        console.log(response.data.data);
       })
-      .catch(err => console.log(err));
-
-      return ()=>{mounted=false;}
-  },[]);
-
+      .catch((err) => console.log(err));
+  }, []);
 
   const handleDelOpen = (user) => {
     setUserId(user.id);
@@ -156,200 +155,294 @@ export default function UserManagement() {
     setOpenDel(false);
   };
 
-
   const handleRolesOpen = (user) => {
     setRoleOpen(true);
-    setRoleIds(user.roles.map(role => role.id));
-    setActionIds(user.actions.map(action => action.id));
+    setRoleIds(user.roles.map((role) => role.id));
+    setActionIds(user.actions.map((action) => action.id));
     setUserId(user.id);
   };
-  
+
   const handleActionsOpen = (user) => {
     setActionOpen(true);
-    setRoleIds(user.roles.map(role => role.id));
-    setActionIds(user.actions.map(action => action.id));
+    setRoleIds(user.roles.map((role) => role.id));
+    setActionIds(user.actions.map((action) => action.id));
     setUserId(user.id);
   };
 
   const handleRolesClose = () => {
     setRoleOpen(false);
   };
-  
+
   const handleActionsClose = () => {
     setActionOpen(false);
   };
-  
-  
+
   const handleEditRoles = async () => {
     try {
-      const response = await axios.put("https://myplsapp.herokuapp.com/rest-account/accounts", {
-        id: userId,
-        roles: roleIds.map(id => ({id})),
-        actions: actionIds.map(id => ({id}))
-      });
+      const response = await axios.put(
+        "https://myplsapp.herokuapp.com/rest-account/accounts",
+        {
+          id: userId,
+          roles: roleIds.map((id) => ({ id })),
+          actions: actionIds.map((id) => ({ id })),
+        }
+      );
       if (response.status === 200 || response.status === 201) {
-        setAllUser(allUser.map(user => user.id === userId ? {...user, roles: roleIds.map(id => ({id: id, rolename: "ROLE_" + roles.find(role => role.id === id).name}))}: user));
+        setAllUser(
+          allUser.map((user) =>
+            user.id === userId
+              ? {
+                  ...user,
+                  roles: roleIds.map((id) => ({
+                    id: id,
+                    rolename:
+                      "ROLE_" + roles.find((role) => role.id === id).name,
+                  })),
+                }
+              : user
+          )
+        );
         setRoleOpen(false);
       }
     } catch (e) {
-      console.log(e)
+      console.log(e);
     }
-  }
-  
+  };
+
   const handleEditActions = async () => {
     try {
-      const response = await axios.put("https://myplsapp.herokuapp.com/rest-account/accounts", {
-        id: userId,
-        roles: roleIds.map(id => ({id})),
-        actions: actionIds.map(id => ({id}))
-      });
+      const response = await axios.put(
+        "https://myplsapp.herokuapp.com/rest-account/accounts",
+        {
+          id: userId,
+          roles: roleIds.map((id) => ({ id })),
+          actions: actionIds.map((id) => ({ id })),
+        }
+      );
       if (response.status === 200 || response.status === 201) {
-        setAllUser(allUser.map(user => user.id === userId ? {...user, actions: actionIds.map(id => ({id: id, actname: actions.find(action => action.id === id).name}))}: user));
+        setAllUser(
+          allUser.map((user) =>
+            user.id === userId
+              ? {
+                  ...user,
+                  actions: actionIds.map((id) => ({
+                    id: id,
+                    actname: actions.find((action) => action.id === id).name,
+                  })),
+                }
+              : user
+          )
+        );
         setActionOpen(false);
       }
     } catch (e) {
-      console.log(e)
+      console.log(e);
     }
-  }
+  };
 
   const handleDel = async () => {
     try {
-      const response = await axios.delete(`https://myplsapp.herokuapp.com/rest-account/accounts/${userId}`);
+      const response = await axios.delete(
+        `https://myplsapp.herokuapp.com/rest-account/accounts/${userId}`
+      );
       if (response.status === 200 || response.status === 201) {
-        setAllUser(allUser.filter(user => user.id !== userId));
+        setAllUser(allUser.filter((user) => user.id !== userId));
         setOpenDel(false);
       }
     } catch (e) {
-      console.log(e)
+      console.log(e);
     }
+  };
+
+  if (loading) {
+    <div>Loading...</div>;
   }
 
   return (
-    <Container container className={classes.root} style={{maxWidth: 1440}}>
-      <div >
-      <Avatar className={classes.avatar} style={{margin: '0 auto'}}>
+    <Container container className={classes.root} style={{ maxWidth: 1440 }}>
+      <div>
+        <Avatar className={classes.avatar} style={{ margin: "0 auto" }}>
           <AssignmentIndIcon />
         </Avatar>
-        <Typography component="h1" variant="h5" align='center' style={{marginBottom: 30}}>
+        <Typography
+          component="h1"
+          variant="h5"
+          align="center"
+          style={{ marginBottom: 30 }}
+        >
           User Management
         </Typography>
       </div>
       <Link to={`/users/create`} className={classes.link}>
-        <Button variant="contained" className={classes.buttonCreate} color="primary">
+        <Button
+          variant="contained"
+          className={classes.buttonCreate}
+          color="primary"
+        >
           Create new user
         </Button>
       </Link>
-        <div  style={{width: 200, marginTop: 20, marginBottom: 20}}>
+      <div style={{ width: 200, marginTop: 20, marginBottom: 20 }}>
         <FormControl variant="outlined" className={classes.formControl}>
-        <InputLabel id="demo-simple-select-outlined-label">Filter</InputLabel>
-        <Select
-          labelId="demo-simple-select-outlined-label"
-          id="demo-simple-select-outlined"
-          value={filterRole}
-          onChange={(e) => setFilterRole(e.target.value)}
-          label="Filter"
-        >
-          <MenuItem value='ALL'>
-            <em>ALL</em>
-          </MenuItem>
-          <MenuItem value='GUEST'>GUEST</MenuItem>
-          <MenuItem value='EMPLOYEE'>EMPLOYEE</MenuItem>
-          <MenuItem value='ADMIN'>ADMIN</MenuItem>
-        </Select>
-      </FormControl>
+          <InputLabel id="demo-simple-select-outlined-label">Filter</InputLabel>
+          <Select
+            labelId="demo-simple-select-outlined-label"
+            id="demo-simple-select-outlined"
+            value={filterRole}
+            onChange={(e) => setFilterRole(e.target.value)}
+            label="Filter"
+          >
+            <MenuItem value="ALL">
+              <em>ALL</em>
+            </MenuItem>
+            <MenuItem value="GUEST">GUEST</MenuItem>
+            <MenuItem value="EMPLOYEE">EMPLOYEE</MenuItem>
+            <MenuItem value="ADMIN">ADMIN</MenuItem>
+          </Select>
+        </FormControl>
       </div>
-    <TableContainer component={Paper}>
-      <Table className={classes.table} aria-label="simple table">
-        <TableHead>
-          <TableRow>
-            <TableCell>Username</TableCell>
-            <TableCell align="right">Email</TableCell>
-            <TableCell align="right">Name</TableCell>
-            <TableCell align="right">Address</TableCell>
-            <TableCell align="right">Age</TableCell>
-            <TableCell align="right">Roles</TableCell>
-            <TableCell align="right"></TableCell>
-            <TableCell align="right">Actions</TableCell>
-            <TableCell align="right"></TableCell>
-            <TableCell align="center">Delete User</TableCell>
-          </TableRow>
-        </TableHead>
-        <TableBody>
-          {allUser.filter(user => filterRole === 'ALL' ? true : user.roles.map(role => role.rolename).indexOf(`ROLE_${filterRole}`) !== -1).map((user) => (
-            <TableRow key={user.username}>
-              <TableCell component="th" scope="row">
-                {user.username}
-              </TableCell>
-              <TableCell align="right">{user.userDto.email}</TableCell>
-              <TableCell align="right">{user.userDto.name}</TableCell>
-              <TableCell align="right">{user.userDto.address}</TableCell>
-              <TableCell align="right">{user.userDto.age}</TableCell>
-              <TableCell align="right">{(""+user.roles.map(role => role.rolename)).split(',').join(' ')}</TableCell>
-              <TableCell align="right">
-              {user.roles[0].rolename !== 'ROLE_GUEST' &&
-                <Button variant="contained" className={classes.buttonCreate} color="primary" onClick={() => handleRolesOpen(user)}>
-                  Edit
-                </Button>}
-              </TableCell>
-              <TableCell align="right">{(""+user.actions.map(action => action.actname)).split(',').join(' ')}</TableCell>
-              <TableCell align="right">
-                <Button variant="contained" className={classes.buttonCreate} color="primary"onClick={() => handleActionsOpen(user)} >
-                  Edit
-                </Button>
-              </TableCell>
-              <TableCell align="right">
-                <Button variant="contained" className={classes.buttonCreate} color="primary"onClick={() => handleDelOpen(user)} >
-                  Delete
-                </Button>
-              </TableCell>
+      <TableContainer component={Paper}>
+        <Table className={classes.table} aria-label="simple table">
+          <TableHead>
+            <TableRow>
+              <TableCell>Username</TableCell>
+              <TableCell align="right">Email</TableCell>
+              <TableCell align="right">Name</TableCell>
+              <TableCell align="right">Address</TableCell>
+              <TableCell align="right">Age</TableCell>
+              <TableCell align="right">Roles</TableCell>
+              <TableCell align="right"></TableCell>
+              <TableCell align="right">Actions</TableCell>
+              <TableCell align="right"></TableCell>
+              <TableCell align="center">Delete User</TableCell>
             </TableRow>
-          ))}
-        </TableBody>
-      </Table>
-    </TableContainer>
-    <div className={classes.pagination}>
-      <Pagination count={1} variant="outlined" color="primary" showFirstButton showLastButton />
-    </div>
-
-    <div>
-        <Dialog open={open} onClose={handleRolesClose} aria-labelledby="form-dialog-title">
-          <DialogTitle id="form-dialog-title">Edit Roles</DialogTitle>
-          <DialogContent style={{width: 500}}>
-            <DialogContentText>
-              Choose Roles to update
-            </DialogContentText>
-          
-            <FormControl variant="outlined" className={classes.formControl} style ={{marginBottom: 30}}>
-            <InputLabel id="demo-simple-select-outlined">Roles</InputLabel>
-            <Select
-              labelId="demo-simple-select-outlined"
-              id="demo-simple-select-outlined"
-              multiple
-              required
-              
-              // ref={selectRef}
-              value={roleIds}
-              onChange={(e) => { 
-                setRoleIds(e.target.value);
-              }}
-              input={<Input id="select-multiple-chip" />}
-              renderValue={(selected) => (
-                <div className={classes.chips}>
-                  {selected.map((value) => (
-                    <Chip key={value} label={roles.find(role => role.id === value).name} className={classes.chip} />
-                  ))}
-                </div>
-              )}
-              MenuProps={MenuProps}
-            >
-              {roles.map((item) => (
-                <MenuItem key={item.id} value={item.id} style={getStyles(item.id, roleIds, theme)}>
-                  {item.name}
-                </MenuItem>
+          </TableHead>
+          <TableBody>
+            {allUser
+              .filter((user) =>
+                filterRole === "ALL"
+                  ? true
+                  : user.roles
+                      .map((role) => role.rolename)
+                      .indexOf(`ROLE_${filterRole}`) !== -1
+              )
+              .map((user) => (
+                <TableRow key={user.username}>
+                  <TableCell component="th" scope="row">
+                    {user.username}
+                  </TableCell>
+                  <TableCell align="right">{user.userDto.email}</TableCell>
+                  <TableCell align="right">{user.userDto.name}</TableCell>
+                  <TableCell align="right">{user.userDto.address}</TableCell>
+                  <TableCell align="right">{user.userDto.age}</TableCell>
+                  <TableCell align="right">
+                    {("" + user.roles.map((role) => role.rolename))
+                      .split(",")
+                      .join(" ")}
+                  </TableCell>
+                  <TableCell align="right">
+                    {user.roles[0].rolename !== "ROLE_GUEST" && (
+                      <Button
+                        variant="contained"
+                        className={classes.buttonCreate}
+                        color="primary"
+                        onClick={() => handleRolesOpen(user)}
+                      >
+                        Edit
+                      </Button>
+                    )}
+                  </TableCell>
+                  <TableCell align="right">
+                    {("" + user.actions.map((action) => action.actname))
+                      .split(",")
+                      .join(" ")}
+                  </TableCell>
+                  <TableCell align="right">
+                    <Button
+                      variant="contained"
+                      className={classes.buttonCreate}
+                      color="primary"
+                      onClick={() => handleActionsOpen(user)}
+                    >
+                      Edit
+                    </Button>
+                  </TableCell>
+                  <TableCell align="right">
+                    <Button
+                      variant="contained"
+                      className={classes.buttonCreate}
+                      color="primary"
+                      onClick={() => handleDelOpen(user)}
+                    >
+                      Delete
+                    </Button>
+                  </TableCell>
+                </TableRow>
               ))}
-            </Select>
-          </FormControl>
-           
+          </TableBody>
+        </Table>
+      </TableContainer>
+      <div className={classes.pagination}>
+        <Pagination
+          count={1}
+          variant="outlined"
+          color="primary"
+          showFirstButton
+          showLastButton
+        />
+      </div>
+
+      <div>
+        <Dialog
+          open={open}
+          onClose={handleRolesClose}
+          aria-labelledby="form-dialog-title"
+        >
+          <DialogTitle id="form-dialog-title">Edit Roles</DialogTitle>
+          <DialogContent style={{ width: 500 }}>
+            <DialogContentText>Choose Roles to update</DialogContentText>
+
+            <FormControl
+              variant="outlined"
+              className={classes.formControl}
+              style={{ marginBottom: 30 }}
+            >
+              <InputLabel id="demo-simple-select-outlined">Roles</InputLabel>
+              <Select
+                labelId="demo-simple-select-outlined"
+                id="demo-simple-select-outlined"
+                multiple
+                required
+                // ref={selectRef}
+                value={roleIds}
+                onChange={(e) => {
+                  setRoleIds(e.target.value);
+                }}
+                input={<Input id="select-multiple-chip" />}
+                renderValue={(selected) => (
+                  <div className={classes.chips}>
+                    {selected.map((value) => (
+                      <Chip
+                        key={value}
+                        label={roles.find((role) => role.id === value).name}
+                        className={classes.chip}
+                      />
+                    ))}
+                  </div>
+                )}
+                MenuProps={MenuProps}
+              >
+                {roles.map((item) => (
+                  <MenuItem
+                    key={item.id}
+                    value={item.id}
+                    style={getStyles(item.id, roleIds, theme)}
+                  >
+                    {item.name}
+                  </MenuItem>
+                ))}
+              </Select>
+            </FormControl>
           </DialogContent>
           <DialogActions>
             <Button onClick={handleRolesClose} color="primary">
@@ -363,44 +456,56 @@ export default function UserManagement() {
       </div>
 
       <div>
-        <Dialog open={actionOpen} onClose={handleActionsClose} aria-labelledby="form-dialog-title">
+        <Dialog
+          open={actionOpen}
+          onClose={handleActionsClose}
+          aria-labelledby="form-dialog-title"
+        >
           <DialogTitle id="form-dialog-title">Edit Actions</DialogTitle>
-          <DialogContent style={{width: 500}}>
-            <DialogContentText>
-              Choose Actions to update
-            </DialogContentText>
-          
-            <FormControl variant="outlined" className={classes.formControl} style ={{marginBottom: 30}}>
-            <InputLabel id="demo-simple-select-outlined">Actions</InputLabel>
-            <Select
-              labelId="demo-simple-select-outlined"
-              id="demo-simple-select-outlined"
-              multiple
-              required
-              
-              // ref={selectRef}
-              value={actionIds}
-              onChange={(e) => { 
-                setActionIds(e.target.value);
-              }}
-              input={<Input id="select-multiple-chip" />}
-              renderValue={(selected) => (
-                <div className={classes.chips}>
-                  {selected.map((value) => (
-                    <Chip key={value} label={actions.find(role => role.id === value).name} className={classes.chip} />
-                  ))}
-                </div>
-              )}
-              MenuProps={MenuProps}
+          <DialogContent style={{ width: 500 }}>
+            <DialogContentText>Choose Actions to update</DialogContentText>
+
+            <FormControl
+              variant="outlined"
+              className={classes.formControl}
+              style={{ marginBottom: 30 }}
             >
-              {actions.map((item) => (
-                <MenuItem key={item.id} value={item.id} style={getStyles(item.id, roleIds, theme)}>
-                  {item.name}
-                </MenuItem>
-              ))}
-            </Select>
-          </FormControl>
-           
+              <InputLabel id="demo-simple-select-outlined">Actions</InputLabel>
+              <Select
+                labelId="demo-simple-select-outlined"
+                id="demo-simple-select-outlined"
+                multiple
+                required
+                // ref={selectRef}
+                value={actionIds}
+                onChange={(e) => {
+                  setActionIds(e.target.value);
+                }}
+                input={<Input id="select-multiple-chip" />}
+                renderValue={(selected) => (
+                  <div className={classes.chips}>
+                    {selected.map((value) => (
+                      <Chip
+                        key={value}
+                        label={actions.find((role) => role.id === value).name}
+                        className={classes.chip}
+                      />
+                    ))}
+                  </div>
+                )}
+                MenuProps={MenuProps}
+              >
+                {actions.map((item) => (
+                  <MenuItem
+                    key={item.id}
+                    value={item.id}
+                    style={getStyles(item.id, roleIds, theme)}
+                  >
+                    {item.name}
+                  </MenuItem>
+                ))}
+              </Select>
+            </FormControl>
           </DialogContent>
           <DialogActions>
             <Button onClick={handleActionsClose} color="primary">
@@ -414,28 +519,28 @@ export default function UserManagement() {
       </div>
 
       <div>
-      <Dialog
-        open={openDel}
-        onClose={handleDelClose}
-        aria-labelledby="alert-dialog-title"
-        aria-describedby="alert-dialog-description"
-      >
-        <DialogTitle id="alert-dialog-title">{"Delete User?"}</DialogTitle>
-        <DialogContent>
-          <DialogContentText id="alert-dialog-description">
-            Are you sure to delete this user
-          </DialogContentText>
-        </DialogContent>
-        <DialogActions>
-          <Button onClick={handleDelClose} color="primary">
-            Cancel
-          </Button>
-          <Button onClick={handleDel} color="primary" autoFocus>
-            Submit
-          </Button>
-        </DialogActions>
-      </Dialog>
-    </div>
+        <Dialog
+          open={openDel}
+          onClose={handleDelClose}
+          aria-labelledby="alert-dialog-title"
+          aria-describedby="alert-dialog-description"
+        >
+          <DialogTitle id="alert-dialog-title">{"Delete User?"}</DialogTitle>
+          <DialogContent>
+            <DialogContentText id="alert-dialog-description">
+              Are you sure to delete this user
+            </DialogContentText>
+          </DialogContent>
+          <DialogActions>
+            <Button onClick={handleDelClose} color="primary">
+              Cancel
+            </Button>
+            <Button onClick={handleDel} color="primary" autoFocus>
+              Submit
+            </Button>
+          </DialogActions>
+        </Dialog>
+      </div>
     </Container>
   );
 }

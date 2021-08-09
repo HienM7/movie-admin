@@ -96,6 +96,7 @@ const LineChart = ({ movies, display, ...props }) => {
 
   const [chartData, setChartData] = useState([]);
   const [selectedDate, setSelectedDate] = useState(new Date());
+  const [loading, setLoading] = useState(true);
 
   const handleDateChange = (date) => {
     setSelectedDate(date);
@@ -143,7 +144,7 @@ const LineChart = ({ movies, display, ...props }) => {
   };
 
   useEffect(() => {
-    console.log('fetchData');
+    console.log("fetchData");
     const fetchData = async () => {
       try {
         const startOfMonth = moment().startOf("month").format("YYYY-MM-DD");
@@ -180,6 +181,7 @@ const LineChart = ({ movies, display, ...props }) => {
             }
           }
           setChartData(dataSet);
+          setLoading(false);
         }
       } catch (e) {
         console.log(e);
@@ -187,9 +189,14 @@ const LineChart = ({ movies, display, ...props }) => {
     };
     fetchData();
   }, []);
+
+  if (loading) {
+    return <div>Loading ...</div>;
+  }
+
   let a = 0;
   return (
-    <div className={classes.chart} {...props} style={{display: display}}>
+    <div className={classes.chart} {...props} style={{ display: display }}>
       <div className={classes.datePicker}>
         <MuiPickersUtilsProvider utils={DateFnsUtils}>
           <DatePicker
