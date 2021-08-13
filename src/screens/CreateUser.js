@@ -129,7 +129,7 @@ export default function CreateUser() {
         !address;
 
       if (check) {
-        setError("Cant create user, please fill all field");
+        setError("Cannot create user, please fill in all fields");
         return;
       }
 
@@ -152,7 +152,7 @@ export default function CreateUser() {
         setCreate(true);
       }
     } catch (error) {
-      setError("Cant create user");
+      setError("Cannot create user");
       console.log(error);
     }
   };
@@ -236,7 +236,7 @@ export default function CreateUser() {
                 variant="outlined"
                 required
                 fullWidth
-                id="firstName"
+                id="firstName" // same id as Username's ??
                 label="Age"
                 value={age}
                 onChange={(e) => setAge(e.target.value)}

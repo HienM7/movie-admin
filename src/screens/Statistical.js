@@ -45,7 +45,7 @@ export default function () {
 
   return (
     <div className={classes.chart}>
-      <h1>Statistical</h1>
+      <h1>Statistics</h1>
       <div className={classes.toggle}>
         <Button
           color="primary"
