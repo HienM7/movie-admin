@@ -84,7 +84,7 @@ export default function NavBar(props) {
             </IconButton>
           </Link>
             <Typography variant="h6" className={classes.title}>
-              Movie Admin
+              Film Booking Admin
             </Typography>
 
           {authInfo.isLogin && (
@@ -93,7 +93,7 @@ export default function NavBar(props) {
                 <Button color="inherit">User Management</Button>
               </Link>
               <Link to={"/statistical"} className={classes.link}>
-                <Button color="inherit">Statistical</Button>
+                <Button color="inherit">Statistics</Button>
               </Link>
               {/* <Link to={"/movie"} className={classes.link}>
                 <Button color="inherit">Movies Genre</Button>
