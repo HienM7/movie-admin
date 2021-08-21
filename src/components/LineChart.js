@@ -191,7 +191,7 @@ const LineChart = ({ movies, display, ...props }) => {
   }, []);
 
   if (loading) {
-    return <div>Loading ...</div>;
+    return <div></div>;
   }
 
   let a = 0;

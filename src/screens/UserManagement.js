@@ -34,7 +34,7 @@ const useStyles = makeStyles((theme) => ({
     minWidth: 650,
   },
   root: {
-    marginTop: 120,
+    marginTop: 25,
   },
   avatar: {
     margin: theme.spacing(1),
@@ -255,7 +255,7 @@ export default function UserManagement() {
   };
 
   if (loading) {
-    <div>Loading...</div>;
+    <div></div>;
   }
 
   return (
